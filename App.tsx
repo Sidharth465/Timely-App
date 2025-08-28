@@ -6,9 +6,16 @@
  * Native scheduling will be added in a follow-up step.
  */
 
+import notifee, {
+  AndroidImportance,
+  AuthorizationStatus,
+  EventType,
+  TriggerType,
+} from '@notifee/react-native';
 import React, { useEffect, useMemo, useState } from 'react';
 import {
   Alert,
+  Modal,
   Platform,
   Pressable,
   ScrollView,
@@ -18,14 +25,7 @@ import {
   TextInput,
   useColorScheme,
   View,
-  Modal,
 } from 'react-native';
-import notifee, {
-  AndroidImportance,
-  EventType,
-  TriggerType,
-  AuthorizationStatus,
-} from '@notifee/react-native';
 import {
   SafeAreaProvider,
   useSafeAreaInsets,
@@ -536,7 +536,12 @@ function AppContent() {
         onRequestClose={closeStartModal}
       >
         <View style={styles.modalWrap}>
-          <View style={styles.modalCard}>
+          <View
+            style={[
+              styles.modalCard,
+              { backgroundColor: theme.background, borderColor: theme.border },
+            ]}
+          >
             <Text style={[styles.modalHeader, { color: theme.textPrimary }]}>
               Set start time
             </Text>
@@ -547,7 +552,12 @@ function AppContent() {
                 >
                   Hour
                 </Text>
-                <View style={styles.stepperRow}>
+                <View
+                  style={[
+                    styles.stepperRow,
+                    { backgroundColor: theme.inputBg },
+                  ]}
+                >
                   <Pressable
                     onPress={() => {
                       const h = Math.max(
@@ -597,7 +607,12 @@ function AppContent() {
                 >
                   Minute
                 </Text>
-                <View style={styles.stepperRow}>
+                <View
+                  style={[
+                    styles.stepperRow,
+                    { backgroundColor: theme.inputBg },
+                  ]}
+                >
                   <Pressable
                     onPress={() => {
                       const m = Math.max(
